@@ -4,7 +4,7 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-public class JavaDatatypes {
+public class Datatypes {
 
     static String whoCanFitTheNumber(String numString)
     {
