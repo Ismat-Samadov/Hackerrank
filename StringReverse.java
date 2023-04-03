@@ -20,8 +20,6 @@ public class StringReverse {
             }
         }
         if(palindrome){System.out.println("Yes");}
-        else{System.out.println("No");}
-        
-        
+        else{System.out.println("No");}    
     }
 }
