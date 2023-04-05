@@ -20,8 +20,8 @@ public class ExceptionHandling {
     
     public static void main(String[] args) {
         while (in .hasNextInt()) {
-            int n = in .nextInt();
-            int p = in .nextInt();
+            int n = in.nextInt();
+            int p = in.nextInt();
             
             try {
                 System.out.println(my_calculator.power(n, p));
