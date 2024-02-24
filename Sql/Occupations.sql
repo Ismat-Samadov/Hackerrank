@@ -27,3 +27,32 @@
 -- The fourth column is an alphabetically ordered list of Actor names.
 -- The empty cell data for columns with less than the maximum number of names per occupation (in this case, the Professor and Actor columns) are fille
 
+WITH cte
+     AS (SELECT NAME,
+                occupation,
+                CASE
+                  WHEN occupation = 'Doctor' THEN NAME
+                END                AS Doctor,
+                CASE
+                  WHEN occupation = 'Professor' THEN NAME
+                END                AS Professor,
+                CASE
+                  WHEN occupation = 'Singer' THEN NAME
+                END                AS Singer,
+                CASE
+                  WHEN occupation = 'Actor' THEN NAME
+                END                AS Actor,
+                Row_number()
+                  OVER (
+                    partition BY occupation
+                    ORDER BY NAME) ROW_NUM
+         FROM   occupations
+         ORDER  BY row_num,
+                   NAME)
+SELECT Max(doctor)    AS Doctor,
+       Max(professor) AS Professor,
+       Max(singer)    AS Singer,
+       Max(actor)     AS Actor
+FROM   cte
+GROUP  BY row_num
+ORDER  BY row_num; 
