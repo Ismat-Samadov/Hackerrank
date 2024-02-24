@@ -38,4 +38,13 @@
 -- Line: 1 Col: 1
 -- Run Code Submit CodeUpload Code as File
 -- BlogScoring
-
+SELECT n,
+       CASE
+         WHEN p IS NULL THEN 'Root'
+         WHEN (SELECT Count(*)
+               FROM   bst
+               WHERE  p = A.n) > 0 THEN 'Inner'
+         ELSE 'Leaf'
+       END AS Types
+FROM   bst A
+ORDER  BY n; 
