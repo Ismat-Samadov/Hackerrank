@@ -40,3 +40,22 @@
 -- For Sample Case 1, we can get the following details:
 
 -- Students  and  both created  challenges. Because  is the maximum number of challenges created, these students are included in the result.
+WITH cte
+     AS (SELECT H.hacker_id,
+                H.name,
+                Count(C.challenge_id) AS ttl_C
+         FROM   hackers H
+                join challenges C
+                  ON H.hacker_id = C.hacker_id
+         GROUP  BY H.hacker_id,
+                   H.name)
+SELECT *
+FROM   cte
+WHERE  ttl_c IN (SELECT Max(ttl_c)
+                 FROM   cte)
+        OR ttl_c IN (SELECT ttl_c
+                     FROM   cte
+                     GROUP  BY ttl_c
+                     HAVING Count(ttl_c) = 1)
+ORDER  BY ttl_c DESC,
+          hacker_id; 
